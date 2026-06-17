@@ -38,7 +38,7 @@ Standout capabilities:
 - **Minimal permissions** for Gmail, OpenAI, and local storage only
 
 <p align="center">
-  <img width="800" alt="QuickMail Popover Prompt" src="public/QuickMail-PopoverPrompt.png">
+  <img width="600" alt="QuickMail Popover Prompt" src="public/QuickMail-PopoverPrompt.png">
   <br>
   <b>Figure 3: AI popover with instruction input, subject toggle, and Create Draft / Regenerate actions.</b>
 </p>
@@ -56,7 +56,7 @@ Standout capabilities:
 QuickMail runs entirely inside Chrome and Gmail, so there is nothing extra to host or deploy. GPT-4o handles the writing, Chrome storage keeps setup to a single saved API key, and the content script brings the assistant straight into the compose window where you already work.
 
 <p align="center">
-  <img width="700" alt="QuickMail Extension Popup" src="public/QuickMail-ExtensionPopup.png">
+  <img width="500" alt="QuickMail Extension Popup" src="public/QuickMail-ExtensionPopup.png">
   <br>
   <b>Figure 4: Extension settings popup for saving your OpenAI API key.</b>
 </p>
@@ -90,7 +90,7 @@ QuickMail runs entirely inside Chrome and Gmail, so there is nothing extra to ho
    - Always read and edit the draft before clicking **Send**. QuickMail assists with writing, but you remain responsible for the final message.
 
 <p align="center">
-  <img width="700" alt="QuickMail Extension Page" src="public/QuickMail-ExtensionPage.png">
+  <img width="650" alt="QuickMail Extension Page" src="public/QuickMail-ExtensionPage.png">
   <br>
   <b>Figure 5: Chrome Extensions page featuring QuickMail.</b>
 </p>
