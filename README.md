@@ -10,16 +10,15 @@
 
 ## Project Overview
 
-QuickMail enables Gmail users to:
+QuickMail lives where you already write email. Click **Write with AI** next to **Send**, describe what you want to say, and get a full draft inserted into your compose window without leaving Gmail.
 
-- **Draft from the Compose Window**: Click **Write with AI** next to **Send** in any Gmail compose or reply window to open a compact writing popover without leaving the thread.
-- **Use Thread Context Automatically**: The extension reads the current email subject and message bodies (up to 6,000 characters) and sends them to the model so replies stay relevant to the conversation.
-- **Describe What You Want**: Type a short instruction — e.g. "confirm Thursday at 2pm and ask for the agenda" — and QuickMail turns it into a full draft.
-- **Generate Structured Emails**: Drafts follow a consistent format: personalized greeting, opening line, body paragraphs, closing sentence, and `Best regards,` with your full Gmail account name.
-- **Detect Recipients and Sender**: Parses the **To** field and your signed-in Gmail display name so greetings use the recipient's first name and sign-offs use your full name.
-- **Create or Regenerate Drafts**: **Create Draft** generates a new message; **Regenerate** replaces the compose body if you want a fresh take on the same instruction.
-- **Generate Subject Lines (New Compose)**: On new emails, toggle subject generation on or off from the popover. When enabled, QuickMail writes a subject line and inserts it into the compose field; when disabled, your existing subject is preserved.
-- **Configure Your API Key**: Open the QuickMail toolbar popup to save your OpenAI API key securely with `chrome.storage.sync`.
+The extension reads the open thread so replies stay on topic, picks up recipient and sender names from the compose window, and formats each draft with a greeting, body, and sign-off. On new messages, you can toggle subject-line generation on or off before you generate.
+
+- **Draft in place** from any compose or reply window
+- **Thread-aware replies** using the subject and recent messages
+- **Create Draft** or **Regenerate** for a fresh take on the same prompt
+- **Optional subject lines** for new emails, with a toggle to protect what you have already written
+- **One-time API key setup** in the toolbar popup
 
 <p align="center">
   <img width="700" alt="QuickMail AI Button" src="public/QuickMail-WriteAIButton.png">
@@ -29,18 +28,14 @@ QuickMail enables Gmail users to:
 
 ## Features
 
-- **Gmail-Native Injection**: Content script detects compose windows via the Send button and message body, then injects the QuickMail button into Gmail's toolbar layout (including table-based `td.gU` rows).
-- **MutationObserver Re-injection**: Debounced DOM observation keeps the button present when Gmail dynamically opens new compose windows or reply boxes.
-- **Thread Context Extraction**: Collects subject from `h2.hP` and message text from `.a3s` elements, trimmed to 6,000 characters for the API payload.
-- **Participant Parsing**: Reads recipient chips from the compose **To** field, resolves display names like `Jane Doe (jane@example.com)` to first names, and pulls the sender's full name from Gmail account metadata.
-- **Compose Mode Awareness**: Distinguishes **new compose** from **reply** — subject generation and subject-line output apply only to new messages; replies return body text only.
-- **Subject Toggle**: Icon control in the popover header toggles subject generation ON/OFF for new compose; defaults ON when the subject field is empty and OFF when you've already typed a subject.
-- **Structured System Prompt**: GPT-4o is instructed to avoid AI-sounding filler, match thread tone, use contractions where natural, and never invent facts or commitments.
-- **Fixed Popover Positioning**: Popover uses `position: fixed`, repositions on scroll/resize, and closes when the anchor button leaves the viewport.
-- **Auto-Growing Textarea**: Instruction field expands as you type with no manual resize handle.
-- **Secure API Key Handling**: Key stored in extension sync storage, never logged or written to the page DOM; user and model text inserted via `createTextNode` rather than `innerHTML`.
-- **Minimal Permissions**: Requires `storage` plus host access to `mail.google.com` and `api.openai.com` only.
-- **Branded UI**: Orange and green palette with the QuickMail logo across the Gmail button, popover, and settings popup.
+QuickMail is built to produce drafts that feel personal and fit naturally into Gmail. GPT-4o is guided to match the thread's tone, use real names in greetings and sign-offs, and avoid generic AI filler. The popover stays anchored to the compose toolbar as you scroll, and your API key is stored locally and sent only to OpenAI.
+
+Standout capabilities:
+
+- **Smart name detection** from the To field and your Gmail account
+- **Reply vs. new compose** handled differently, including when subject lines are generated
+- **Subject toggle** in the popover for new messages
+- **Minimal permissions** for Gmail, OpenAI, and local storage only
 
 <p align="center">
   <img width="800" alt="QuickMail Popover Prompt" src="public/QuickMail-PopoverPrompt.png">
@@ -50,12 +45,15 @@ QuickMail enables Gmail users to:
 
 ## Technologies Used
 
-- **Chrome Extension Manifest V3**: Modern extension architecture with a content script, action popup, and scoped host permissions.
-- **Vanilla JavaScript**: No build step, framework, or backend — plain HTML, CSS, and JS loaded directly by the extension.
-- **OpenAI Chat Completions API**: `gpt-4o` model for draft generation with a custom system prompt and compose metadata.
-- **`chrome.storage.sync`**: Persists the user's API key across signed-in Chrome profiles.
-- **DOM APIs**: `MutationObserver`, `ResizeObserver`, and compose-field `input` events for injection, layout, and Gmail integration.
-- **Content Script + CSS**: `content.js` and `styles.css` injected on `https://mail.google.com/*` at `document_idle`.
+| Technology | Purpose |
+|---|---|
+| Chrome Extension (Manifest V3) | Injects QuickMail into Gmail and runs the settings popup |
+| JavaScript | Extension logic, Gmail integration, and OpenAI requests |
+| OpenAI GPT-4o | Generates email drafts from your prompt and thread context |
+| chrome.storage.sync | Saves your API key across signed-in Chrome profiles |
+| HTML & CSS | Settings popup and in-Gmail UI styling |
+
+QuickMail runs entirely inside Chrome and Gmail, so there is nothing extra to host or deploy. GPT-4o handles the writing, Chrome storage keeps setup to a single saved API key, and the content script brings the assistant straight into the compose window where you already work.
 
 <p align="center">
   <img width="700" alt="QuickMail Extension Popup" src="public/QuickMail-ExtensionPopup.png">
@@ -89,7 +87,7 @@ QuickMail enables Gmail users to:
    - Click **Regenerate** if you want a new version from the same instruction.
 
 4. **Review Before Sending**:
-   - Always read and edit the draft before clicking **Send** — QuickMail assists with writing but you remain responsible for the final message.
+   - Always read and edit the draft before clicking **Send**. QuickMail assists with writing, but you remain responsible for the final message.
 
 <p align="center">
   <img width="700" alt="QuickMail Extension Page" src="public/QuickMail-ExtensionPage.png">
