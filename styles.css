@@ -1,0 +1,531 @@
+/* QuickMail styles
+ * All selectors are namespaced with .quickmail- to avoid clobbering Gmail.
+ */
+
+/* ----------------------------- design tokens ----------------------------- */
+
+.quickmail-popup,
+.quickmail-popover,
+.quickmail-wrapper {
+  --qm-orange: #f07820;
+  --qm-orange-hover: #e06a12;
+  --qm-orange-soft: #fff4e8;
+  --qm-green: #20846a;
+  --qm-green-hover: #1a6f58;
+  --qm-green-soft: #eaf6f1;
+  --qm-text: #1a1a1a;
+  --qm-text-muted: #6b7280;
+  --qm-border: #e8e2da;
+  --qm-bg: #fffbf7;
+  --qm-surface: #ffffff;
+  --qm-font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ------------------------------- brand logo ------------------------------- */
+
+.quickmail-logo {
+  display: block;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.quickmail-logo-sm {
+  width: 22px;
+  height: 22px;
+}
+
+.quickmail-logo-md {
+  width: 26px;
+  height: 26px;
+}
+
+.quickmail-logo-lg {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+/* ----------------------------- in-Gmail button ----------------------------- */
+
+@keyframes quickmail-button-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes quickmail-button-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.quickmail-wrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.quickmail-wrapper-enter {
+  animation: quickmail-button-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+td.gU .quickmail-wrapper {
+  margin-left: 0;
+}
+
+.quickmail-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--qm-border);
+  border-radius: 999px;
+  background: var(--qm-surface);
+  color: var(--qm-text);
+  font-family: var(--qm-font);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    border-color 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quickmail-trigger-label {
+  position: relative;
+  transition: color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quickmail-trigger .quickmail-logo-sm {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quickmail-trigger:hover {
+  border-color: rgba(240, 120, 32, 0.38);
+  background: var(--qm-orange-soft);
+}
+
+.quickmail-trigger:hover .quickmail-logo-sm {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.quickmail-trigger:hover .quickmail-trigger-label {
+  color: #9a4a12;
+}
+
+.quickmail-trigger:active {
+  animation: quickmail-button-pop 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quickmail-trigger:focus-visible {
+  outline: 2px solid rgba(240, 120, 32, 0.4);
+  outline-offset: 2px;
+}
+
+.quickmail-trigger-active {
+  border-color: rgba(32, 132, 106, 0.45);
+  background: var(--qm-green-soft);
+}
+
+.quickmail-trigger-active .quickmail-trigger-label {
+  color: var(--qm-green-hover);
+}
+
+.quickmail-trigger-active .quickmail-logo-sm {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quickmail-wrapper-enter,
+  .quickmail-trigger:active {
+    animation: none;
+  }
+
+  .quickmail-trigger,
+  .quickmail-trigger-label,
+  .quickmail-trigger .quickmail-logo-sm {
+    transition: none;
+  }
+}
+
+/* ------------------------------- popover ------------------------------- */
+
+.quickmail-popover {
+  position: fixed;
+  z-index: 2147483647;
+  width: 344px;
+  max-width: calc(100vw - 16px);
+  padding: 16px;
+  border: 1px solid var(--qm-border);
+  border-top: 3px solid var(--qm-orange);
+  border-radius: 16px;
+  background: var(--qm-bg);
+  color: var(--qm-text);
+  box-shadow:
+    0 18px 40px rgba(26, 26, 26, 0.12),
+    0 4px 10px rgba(26, 26, 26, 0.06);
+  font-family: var(--qm-font);
+}
+
+.quickmail-popover-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--qm-border);
+}
+
+.quickmail-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--qm-text);
+}
+
+.quickmail-popover-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--qm-text);
+}
+
+.quickmail-input {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  overflow-y: hidden;
+  min-height: 40px;
+  max-height: 180px;
+  padding: 9px 12px;
+  border: 1px solid var(--qm-border);
+  border-radius: 10px;
+  background: var(--qm-orange-soft);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--qm-text);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.quickmail-input::placeholder {
+  color: var(--qm-text-muted);
+  opacity: 1;
+}
+
+.quickmail-input:focus {
+  outline: none;
+  border-color: rgba(240, 120, 32, 0.55);
+  background: var(--qm-surface);
+}
+
+.quickmail-status {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--qm-text-muted);
+}
+
+.quickmail-status.quickmail-status-visible {
+  display: flex;
+}
+
+.quickmail-status-text {
+  flex: 1 1 auto;
+}
+
+.quickmail-status.quickmail-error {
+  color: #dc2626;
+}
+
+.quickmail-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.quickmail-action-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quickmail-btn {
+  appearance: none;
+  border: 1px solid var(--qm-border);
+  background: var(--qm-surface);
+  color: var(--qm-text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+}
+
+.quickmail-btn:hover:not(:disabled) {
+  background: var(--qm-orange-soft);
+  border-color: rgba(240, 120, 32, 0.35);
+}
+
+.quickmail-btn-primary {
+  border-color: transparent;
+  background: var(--qm-orange);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(240, 120, 32, 0.28);
+}
+
+.quickmail-btn-primary:hover:not(:disabled) {
+  background: var(--qm-orange-hover);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(240, 120, 32, 0.32);
+}
+
+.quickmail-btn-secondary {
+  border-color: var(--qm-green);
+  background: var(--qm-surface);
+  color: var(--qm-green);
+}
+
+.quickmail-btn-secondary:hover:not(:disabled) {
+  background: var(--qm-green-soft);
+  border-color: var(--qm-green-hover);
+  color: var(--qm-green-hover);
+}
+
+.quickmail-btn-compact {
+  padding: 0 14px;
+  min-height: 40px;
+}
+
+.quickmail-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.quickmail-subject-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-left: auto;
+  border: 1px solid var(--qm-border);
+  border-radius: 10px;
+  background: var(--qm-surface);
+  color: var(--qm-text-muted);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.quickmail-subject-toggle:hover:not(:disabled) {
+  border-color: rgba(240, 120, 32, 0.35);
+  background: var(--qm-orange-soft);
+  color: #9a4a12;
+}
+
+.quickmail-subject-toggle-active {
+  border-color: var(--qm-green);
+  background: var(--qm-green-soft);
+  color: var(--qm-green);
+}
+
+.quickmail-subject-toggle-active:hover:not(:disabled) {
+  border-color: var(--qm-green-hover);
+  background: var(--qm-green-soft);
+  color: var(--qm-green-hover);
+}
+
+.quickmail-subject-toggle:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.quickmail-subject-icon {
+  width: 19px;
+  height: 19px;
+}
+
+.quickmail-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffe2c4;
+  border-top-color: var(--qm-orange);
+  border-radius: 50%;
+  animation: quickmail-spin 0.7s linear infinite;
+  flex: 0 0 auto;
+}
+
+@keyframes quickmail-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------------ settings popup ------------------------------ */
+
+.quickmail-popup {
+  width: 340px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--qm-font);
+  color: var(--qm-text);
+  background: var(--qm-bg);
+}
+
+.quickmail-popup-header {
+  padding: 20px 20px 18px;
+  background: var(--qm-bg);
+  border-bottom: 1px solid var(--qm-border);
+  border-left: 4px solid var(--qm-orange);
+}
+
+.quickmail-popup-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.quickmail-popup-header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--qm-text);
+}
+
+.quickmail-popup-header p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--qm-green);
+}
+
+.quickmail-popup-body {
+  padding: 16px 20px 20px;
+}
+
+.quickmail-popup-card {
+  padding: 16px;
+  border: 1px solid var(--qm-border);
+  border-radius: 12px;
+  background: var(--qm-surface);
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.04);
+}
+
+.quickmail-popup-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--qm-text);
+}
+
+.quickmail-key-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.quickmail-popup-input {
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 40px;
+  padding: 10px 12px;
+  border: 1px solid var(--qm-border);
+  border-radius: 10px;
+  background: var(--qm-orange-soft);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--qm-text);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.quickmail-popup-input:focus {
+  outline: none;
+  border-color: var(--qm-orange);
+  background: var(--qm-surface);
+  box-shadow: 0 0 0 3px rgba(240, 120, 32, 0.14);
+}
+
+.quickmail-full {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.quickmail-popup-status {
+  min-height: 16px;
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--qm-green);
+}
+
+.quickmail-popup-status.quickmail-error {
+  color: #dc2626;
+}
+
+.quickmail-popup-note {
+  margin: 14px 0 0;
+  padding: 0 2px;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--qm-text-muted);
+}
+
+.quickmail-popup-note code {
+  background: var(--qm-orange-soft);
+  color: #9a4a12;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.quickmail-popup-note a {
+  color: var(--qm-green);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.quickmail-popup-note a:hover {
+  color: var(--qm-green-hover);
+  text-decoration: underline;
+}

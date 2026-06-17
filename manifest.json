@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "QuickMail",
+  "version": "1.0.11",
+  "description": "Adds an AI writing assistant inside Gmail's compose window that helps you draft emails using the conversation thread as context.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://api.openai.com/*"
+  ],
+  "icons": {
+    "16": "public/QuickMail-icon.png",
+    "48": "public/QuickMail-icon.png",
+    "128": "public/QuickMail-icon.png"
+  },
+  "action": {
+    "default_title": "QuickMail Settings",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "public/QuickMail-icon.png",
+      "48": "public/QuickMail-icon.png",
+      "128": "public/QuickMail-icon.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["public/QuickMail-icon.png"],
+      "matches": ["https://mail.google.com/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

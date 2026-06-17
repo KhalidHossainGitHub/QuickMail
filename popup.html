@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuickMail Settings</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="quickmail-popup">
+    <header class="quickmail-popup-header">
+      <div class="quickmail-popup-brand">
+        <img
+          src="public/QuickMail-icon.png"
+          class="quickmail-logo quickmail-logo-lg"
+          alt=""
+          aria-hidden="true"
+        />
+        <div>
+          <h1>QuickMail</h1>
+          <p>AI Writing Assistant for Gmail</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="quickmail-popup-body">
+      <section class="quickmail-popup-card">
+        <label class="quickmail-popup-label" for="apiKey">OpenAI API key</label>
+        <div class="quickmail-key-row">
+          <input
+            type="password"
+            id="apiKey"
+            class="quickmail-popup-input"
+            placeholder="sk-..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button
+            type="button"
+            id="toggleVisibility"
+            class="quickmail-btn quickmail-btn-secondary quickmail-btn-compact"
+            aria-label="Show or hide key"
+          >
+            Show
+          </button>
+        </div>
+
+        <button type="button" id="saveKey" class="quickmail-btn quickmail-btn-primary quickmail-full">
+          Save settings
+        </button>
+
+        <p id="status" class="quickmail-popup-status" role="status"></p>
+      </section>
+
+      <p class="quickmail-popup-note">
+        Your key is stored with <code>chrome.storage.sync</code> and is only sent
+        directly to the OpenAI API. It is never shared with anyone else.
+        <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">
+          Get an API key
+        </a>
+      </p>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
