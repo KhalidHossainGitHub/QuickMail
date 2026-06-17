@@ -1,8 +1,6 @@
 # QuickMail
 
-**QuickMail** is a Chrome extension that adds an AI writing assistant directly inside Gmail's compose window. Instead of switching tabs or copying thread context by hand, you describe what you want to say and QuickMail drafts a polished email using the open conversation, your recipients, and your Gmail account name — all without leaving Gmail.
-
-It reads the thread you're replying to, detects who you're writing to, and generates structured drafts with a natural greeting, clear body paragraphs, and a professional sign-off. For new messages, optional subject-line generation helps you start with a strong subject without overwriting one you've already written. Your OpenAI API key stays in Chrome storage and is sent only to OpenAI — there is no backend server.
+**QuickMail** is a Chrome extension that adds an AI writing assistant directly inside Gmail's compose window. Tell it what you want to say and it drafts a polished email using the thread, your recipients, and your account name, with a greeting, clear body, and sign-off. For new messages, you can optionally generate a subject line without overwriting one you have already written. Your OpenAI API key is stored in Chrome and sent only to OpenAI, with no backend server.
 
 <p align="center">
   <img width="932" alt="QuickMail Preview" src="public/QuickMail-Preview.png">
@@ -24,6 +22,8 @@ QuickMail enables Gmail users to:
 - **Configure Your API Key**: Open the QuickMail toolbar popup to save your OpenAI API key securely with `chrome.storage.sync`.
 
 <p align="center">
+  <img width="700" alt="QuickMail AI Button" src="public/QuickMail-WriteAIButton.png">
+  <br>
   <b>Figure 2: Write with AI button injected next to Send in the Gmail compose toolbar.</b>
 </p>
 
@@ -43,6 +43,8 @@ QuickMail enables Gmail users to:
 - **Branded UI**: Orange and green palette with the QuickMail logo across the Gmail button, popover, and settings popup.
 
 <p align="center">
+  <img width="800" alt="QuickMail Popover Prompt" src="public/QuickMail-PopoverPrompt.png">
+  <br>
   <b>Figure 3: AI popover with instruction input, subject toggle, and Create Draft / Regenerate actions.</b>
 </p>
 
@@ -56,6 +58,8 @@ QuickMail enables Gmail users to:
 - **Content Script + CSS**: `content.js` and `styles.css` injected on `https://mail.google.com/*` at `document_idle`.
 
 <p align="center">
+  <img width="700" alt="QuickMail Extension Popup" src="public/QuickMail-ExtensionPopup.png">
+  <br>
   <b>Figure 4: Extension settings popup for saving your OpenAI API key.</b>
 </p>
 
@@ -88,7 +92,9 @@ QuickMail enables Gmail users to:
    - Always read and edit the draft before clicking **Send** — QuickMail assists with writing but you remain responsible for the final message.
 
 <p align="center">
-  <b>Figure 5: Generated draft inserted into Gmail compose with structured greeting and sign-off.</b>
+  <img width="700" alt="QuickMail Extension Page" src="public/QuickMail-ExtensionPage.png">
+  <br>
+  <b>Figure 5: Chrome Extensions page featuring QuickMail.</b>
 </p>
 
 ## License
